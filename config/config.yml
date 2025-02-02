@@ -1,0 +1,16 @@
+rabbitMQ:
+  host: armadillo.rmq.cloudamqp.com
+  port: 5672
+  user: mnvczwsy
+  password: bijdXySzgcZ19kd-EthlzcCCLpYgU1a-
+  vhost: /mnvczwsy
+  exchange: exchange
+  queue: queue
+  routingKey: routingKey
+logger:
+  level: debug
+echo:
+  port: ":5002"
+  timeout: 30
+  basePath: /api/v1
+  host: "http://localhost"
