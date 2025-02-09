@@ -3,10 +3,10 @@ package models
 import "github.com/google/uuid"
 
 type User struct {
-	Id           uuid.UUID `json:"id"`
+	Id           uuid.UUID `json:"id" gorm:"primaryKey"`
 	MongoDBId    string    `json:"mongodb_id"`
 	Email        string    `json:"email"`
 	Phone        string    `json:"phone"`
-	Preferences  Preference `json:"preferences"`
+	Preference   string    `json:"preference"`
 	Active       bool      `json:"active"`
 }

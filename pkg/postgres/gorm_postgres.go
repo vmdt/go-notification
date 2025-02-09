@@ -59,3 +59,12 @@ func (db *Gorm) Close() {
 	_ = sqlDB.Close()
 }
 
+func Migrate(gorm *gorm.DB, types ...interface{}) error {
+	for _, t := range types {
+		err := gorm.AutoMigrate(t)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

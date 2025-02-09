@@ -22,7 +22,7 @@ type Config struct {
 	GormPostgres *postgres.PostgresConfig `mapstructure:"postgres"`
 }
 
-func InitConfig() (*Config, *logger.LoggerConfig, *rabbitmq.RabbitMQConfig, error) {
+func InitConfig() (*Config, *logger.LoggerConfig, *rabbitmq.RabbitMQConfig, *postgres.PostgresConfig, error) {
 	if configPath == "" {
 		configPathFromEnv := os.Getenv("CONFIG_PATH")
 		if configPathFromEnv != "" {
@@ -32,7 +32,7 @@ func InitConfig() (*Config, *logger.LoggerConfig, *rabbitmq.RabbitMQConfig, erro
 			//https://stackoverflow.com/questions/18537257/how-to-get-the-directory-of-the-currently-running-file
 			d, err := dirname()
 			if err != nil {
-				return nil, nil, nil, err
+				return nil, nil, nil, nil, err
 			}
 
 			configPath = d
@@ -46,14 +46,14 @@ func InitConfig() (*Config, *logger.LoggerConfig, *rabbitmq.RabbitMQConfig, erro
 	viper.SetConfigType("yaml")
 
 	if err := viper.ReadInConfig(); err != nil {
-		return nil, nil, nil, err
+		return nil, nil, nil, nil, err
 	}
 
 	if err := viper.Unmarshal(cfg); err != nil {
-		return nil, nil, nil, err
+		return nil, nil, nil, nil, err
 	}
 
-	return cfg, cfg.Logger, cfg.RabbitMQ, nil
+	return cfg, cfg.Logger, cfg.RabbitMQ, cfg.GormPostgres, nil
 }
 
 func filename() (string, error) {
