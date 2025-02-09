@@ -7,6 +7,7 @@ import (
 	"github.com/vmdt/notification-system/pkg/http"
 	echoserver "github.com/vmdt/notification-system/pkg/http/echo/server"
 	"github.com/vmdt/notification-system/pkg/logger"
+	gorm_postgres "github.com/vmdt/notification-system/pkg/postgres"
 	"github.com/vmdt/notification-system/pkg/rabbitmq"
 	"go.uber.org/fx"
 )
@@ -21,6 +22,7 @@ func main() {
 				echoserver.NewEchoServer,
 				http.NewContext,
 				validator.New,
+				gorm_postgres.NewGorm,
 			),
 			fx.Invoke(server.RunServer),
 		),

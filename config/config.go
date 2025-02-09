@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 	echoserver "github.com/vmdt/notification-system/pkg/http/echo/server"
 	"github.com/vmdt/notification-system/pkg/logger"
+	"github.com/vmdt/notification-system/pkg/postgres"
 	"github.com/vmdt/notification-system/pkg/rabbitmq"
 )
 
@@ -18,6 +19,7 @@ type Config struct {
 	Logger *logger.LoggerConfig `mapstructure:"logger"`
 	RabbitMQ *rabbitmq.RabbitMQConfig `mapstructure:"rabbitmq"`
 	Echo *echoserver.EchoConfig `mapstructure:"echo"`
+	GormPostgres *postgres.PostgresConfig `mapstructure:"postgres"`
 }
 
 func InitConfig() (*Config, *logger.LoggerConfig, *rabbitmq.RabbitMQConfig, error) {
