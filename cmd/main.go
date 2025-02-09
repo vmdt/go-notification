@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-playground/validator/v10"
 	"github.com/vmdt/notification-system/config"
 	"github.com/vmdt/notification-system/internal/server"
 	"github.com/vmdt/notification-system/pkg/http"
@@ -19,6 +20,7 @@ func main() {
 				rabbitmq.NewRabbitMQConn,
 				echoserver.NewEchoServer,
 				http.NewContext,
+				validator.New,
 			),
 			fx.Invoke(server.RunServer),
 		),
